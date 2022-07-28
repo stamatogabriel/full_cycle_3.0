@@ -1,14 +1,8 @@
 import { Category, CategoryProps } from "./category";
 import { omit } from "lodash";
-import UniqueEntityId from "../../@seedwork/domain/unique-entity-id.vo";
+import UniqueEntityId from "../../@seedwork/domain/value-objects/unique-entity-id.vo";
 
 describe("Category Unit Tests", () => {
-  const mockCategory: CategoryProps = {
-    name: "Movie",
-    description: null,
-    is_active: true,
-  };
-
   test("category s constructor", () => {
     let category = new Category({ name: "Movie name" });
     let props = omit(category.props, "created_at");
