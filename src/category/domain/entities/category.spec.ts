@@ -66,13 +66,16 @@ describe("Category Unit Tests", () => {
     data.forEach(item => {
       let category = new Category(item.props, item.id as any);
       expect(category.id).not.toBeNull();
-      expect(category.id).toBeInstanceOf(UniqueEntityId);
+      expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId);
     })
   });
 
-  test("category s getter name field", () => {
+  test("category s getter and name field", () => {
     const category = new Category({ name: "Movie" });
     expect(category.name).toBe("Movie");
+
+    category["name"] = "other name";
+    expect(category.name).toBe("other name");
   });
 
   test("category s getter and setter description field", () => {
@@ -120,4 +123,33 @@ describe("Category Unit Tests", () => {
     category = new Category({ name: "Movie", created_at });
     expect(category.created_at).toBe(created_at);
   });
+
+  test("category update", () => {
+    let category = new Category({ name: "Movie", is_active: false });
+
+    category.update({name: 'Updated Movie', description: 'this is a description'})
+
+    expect(category.name).toBe('Updated Movie')
+    expect(category.description).toBe('this is a description')
+
+    category.update({ description: null })
+    expect(category.description).toBeNull()
+
+  })
+
+  test("category activate", () => {
+    let category = new Category({ name: "Movie", is_active: false });
+
+    category.activate()
+
+    expect(category.is_active).toBeTruthy()
+  })
+
+  test("category deactivate", () => {
+    let category = new Category({ name: "Movie", is_active: true });
+
+    category.deactivate()
+
+    expect(category.is_active).not.toBeTruthy()
+  })
 });
