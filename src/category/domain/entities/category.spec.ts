@@ -1,8 +1,13 @@
 import { Category, CategoryProps } from "./category";
 import { omit } from "lodash";
-import UniqueEntityId from "../../@seedwork/domain/value-objects/unique-entity-id.vo";
+import UniqueEntityId from "../../../@seedwork/domain/value-objects/unique-entity-id.vo";
 
 describe("Category Unit Tests", () => {
+
+  beforeEach(() => {
+    Category.validate = jest.fn()
+  })
+
   test("category s constructor", () => {
     let category = new Category({ name: "Movie name" });
     let props = omit(category.props, "created_at");
@@ -12,6 +17,7 @@ describe("Category Unit Tests", () => {
       is_active: true,
     });
     expect(category.props.created_at).toBeInstanceOf(Date);
+    expect(Category.validate).toHaveBeenCalled()
 
     category = new Category({
       name: "Movie",
@@ -127,12 +133,13 @@ describe("Category Unit Tests", () => {
   test("category update", () => {
     let category = new Category({ name: "Movie", is_active: false });
 
-    category.update({name: 'Updated Movie', description: 'this is a description'})
+    category.update({ name: 'Updated Movie', description: 'this is a description' })
 
+    expect(Category.validate).toHaveBeenCalledTimes(2)
     expect(category.name).toBe('Updated Movie')
     expect(category.description).toBe('this is a description')
 
-    category.update({ description: null })
+    category.update({ name: 'Updated Movie', description: null })
     expect(category.description).toBeNull()
 
   })

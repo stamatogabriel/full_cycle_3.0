@@ -31,6 +31,5 @@ describe('object unit tests', () => {
       .toThrow("Cannot assign to read only property 'prop2' of object '#<Object>'")
 
     expect(obj.deep.prop3).toBeInstanceOf(Date)
-
   })
 })
