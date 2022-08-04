@@ -1,5 +1,5 @@
-import ValidationError from "../../../@seedwork/errors/validation-error"
-import { Category } from "./category"
+import ValidationError from "../../../../@seedwork/errors/validation-error"
+import { Category } from "../category"
 
 describe('Integration Category Tests', () => {
   describe('Create method', () => {
