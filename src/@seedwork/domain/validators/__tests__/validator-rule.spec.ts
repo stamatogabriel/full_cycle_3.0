@@ -1,9 +1,9 @@
-import ValidationError from "../../errors/validation-error";
+import { ValidationError } from "../../errors/validation-error";
 import ValidatorRules from "../validator-rules";
 
 type Values = {
   value: any;
-  property: string; 
+  property: string;
 }
 
 type ExpectedRule = {
@@ -26,10 +26,10 @@ function assertIsValid(expected: ExpectedRule) {
   }).not.toThrow(expected.error);
 }
 
-function runRule({ 
-  value, 
-  property, 
-  rule, 
+function runRule({
+  value,
+  property,
+  rule,
   params = []
 }: Omit<ExpectedRule, "error">) {
   const validator = ValidatorRules.values(value, property);
@@ -111,7 +111,7 @@ describe("ValidatorRules unit test", () => {
       });
     });
   });
-  
+
   test("max length validation rule", () => {
     let arrange: Values[] = [
       { value: "7777", property: 'field' },
@@ -145,7 +145,7 @@ describe("ValidatorRules unit test", () => {
       });
     });
   });
-  
+
   test("boolean validation rule", () => {
     let arrange: Values[] = [
       { value: 1, property: 'field' },
