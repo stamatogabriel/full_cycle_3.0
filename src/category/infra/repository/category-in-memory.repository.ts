@@ -1,9 +1,14 @@
 import { Category } from "category/domain/entities/category";
-import CategoryRepositoryInterface from "category/domain/repository/category.repository";
+import CategoryRepository from "category/domain/repository/category.repository";
 import { InMemorySearchableRepository } from "../../../@seedwork/domain/repository/in-memory.repository";
 
-class CategoryInMemoryRepository
+export default class CategoryInMemoryRepository
   extends InMemorySearchableRepository<Category>
-  implements CategoryRepositoryInterface {
+  implements CategoryRepository.Repository {
+  protected async applyFilter(items: Category[], filter: CategoryRepository.Filter): Promise<Category[]> {
+    if (!filter) return items
 
+    return items.filter(i =>
+      i.props.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
+  }
 }
