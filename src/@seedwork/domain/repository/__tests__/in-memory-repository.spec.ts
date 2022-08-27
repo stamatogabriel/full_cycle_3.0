@@ -25,12 +25,12 @@ describe('InMemoryRepository Unit Tests', () => {
 
   it('should throws error when entity not found', () => {
     expect(repository.findById('fake id')).rejects.toThrow(
-      new NotFoundError(`Entity not found using ID: fake id`)
+      new NotFoundError(`Entity not found using ID fake id`)
     )
 
     const id = new UniqueEntityId()
     expect(repository.findById(id)).rejects.toThrow(
-      new NotFoundError(`Entity not found using ID: ${id}`)
+      new NotFoundError(`Entity not found using ID ${id}`)
     )
   })
 
@@ -57,7 +57,7 @@ describe('InMemoryRepository Unit Tests', () => {
     const entity = new StubEntity({ name: 'name value', price: 3 })
 
     expect(repository.update(entity)).rejects.toThrow(
-      new NotFoundError(`Entity not found using ID: ${entity.id}`)
+      new NotFoundError(`Entity not found using ID ${entity.id}`)
     )
   })
 
@@ -73,12 +73,12 @@ describe('InMemoryRepository Unit Tests', () => {
 
   it('should throws error on delete when entity not found', () => {
     expect(repository.delete('fake id')).rejects.toThrow(
-      new NotFoundError(`Entity not found using ID: fake id`)
+      new NotFoundError(`Entity not found using ID fake id`)
     )
 
     const id = new UniqueEntityId()
     expect(repository.delete(id)).rejects.toThrow(
-      new NotFoundError(`Entity not found using ID: ${id}`)
+      new NotFoundError(`Entity not found using ID ${id}`)
     )
   })
 
