@@ -1,4 +1,4 @@
-import { EntityValidationError } from "../../../../@seedwork/domain/errors/validation-error"
+import { EntityValidationError } from "@seedwork/domain/errors/validation-error"
 import { Category } from "../category"
 
 describe('Integration Category Tests', () => {
