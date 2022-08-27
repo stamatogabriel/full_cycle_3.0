@@ -24,7 +24,8 @@ describe('DeleteCategoryUseCase Unit Tests', () => {
 
     repository.items = [category]
 
-    await useCase.execute({ id: category.id })
+    const output = await useCase.execute({ id: category.id })
+    expect(output).toStrictEqual({ message: 'category successfully deleted' })
     expect(repository.items).toHaveLength(0)
     expect(spyDelete).toBeCalledTimes(1)
   })
