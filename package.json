@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Gabriel Stamato",
   "license": "MIT",
+  "imports": {
+    "#seedwork/*": "./dist/@seedwork/*.js"
+  },
   "scripts": {
     "ts-node": "ts-node",
     "tsc": "tsc",
