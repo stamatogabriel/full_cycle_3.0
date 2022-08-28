@@ -9,6 +9,13 @@
     "#seedwork/*": "./dist/@seedwork/*.js",
     "#category/*": "./dist/category/*.js"
   },
+  "exports": {
+    "./@seedwork/application": "./dist/@seedwork/application/index.js",
+    "./@seedwork/domain": "./dist/@seedwork/domain/index.js",
+    "./category/domain": "./dist/category/domain/index.js",
+    "./category/application": "./dist/category/application/index.js",
+    "./category/infra": "./dist/category/infra/index.js"
+  },
   "scripts": {
     "ts-node": "ts-node",
     "tsc": "tsc",
