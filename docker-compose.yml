@@ -6,3 +6,5 @@ services:
     container_name: micro-videos-typescript-app
     volumes:
       - .:/home/node/app
+    ports:
+      - 3000:3000
