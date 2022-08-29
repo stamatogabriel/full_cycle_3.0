@@ -16,6 +16,28 @@
     "./category/application": "./dist/category/application/index.js",
     "./category/infra": "./dist/category/infra/index.js"
   },
+  "typesVersions": {
+    ">=4.0": {
+      "category/domain": [
+        "./dist/category/domain/index.d.ts"
+      ],
+      "category/application": [
+        "./dist/category/application/index.d.ts"
+      ],
+      "category/infra": [
+        "./dist/category/infra/index.d.ts"
+      ],
+      "@seedwork/infra": [
+        "./dist/@seedwork/infra/index.d.ts"
+      ],
+      "@seedwork/application": [
+        "./dist/@seedwork/application/index.d.ts"
+      ],
+      "@seedwork/domain": [
+        "./dist/@seedwork/domain/index.d.ts"
+      ]
+    }
+  },
   "scripts": {
     "ts-node": "ts-node",
     "tsc": "tsc",
