@@ -18,3 +18,5 @@ export class PaginationOutputMapper {
     }
   }
 }
+
+export default PaginationOutputMapper

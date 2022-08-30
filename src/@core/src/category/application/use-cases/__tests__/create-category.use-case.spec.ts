@@ -1,13 +1,13 @@
 import CategoryInMemoryRepository from "#category/domain/repository/category-in-memory.repository";
-import CreateCategoryUseCase from "../create-category.use-case"
+import { CreateCategoryUseCase } from "../create-category.use-case"
 
 describe('CreateCategoryUseCase Unit Tests', () => {
-  let useCase: CreateCategoryUseCase;
+  let useCase: CreateCategoryUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
   beforeAll (() => {
     repository = new CategoryInMemoryRepository()
-    useCase = new CreateCategoryUseCase(repository)
+    useCase = new CreateCategoryUseCase.UseCase(repository)
   })
 
   it('should create a category', async () => {

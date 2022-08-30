@@ -1,15 +1,15 @@
 import { Category } from "#category/domain/entities/category";
 import NotFoundError from  "#seedwork/domain/errors/not-found.error";
 import CategoryInMemoryRepository from "#category/domain/repository/category-in-memory.repository";
-import GetCategoryUseCase from "../get-category.use-case"
+import { GetCategoryUseCase } from "../get-category.use-case"
 
 describe('GetCategoryUseCase Unit Tests', () => {
-  let useCase: GetCategoryUseCase;
+  let useCase: GetCategoryUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
   beforeAll(() => {
     repository = new CategoryInMemoryRepository()
-    useCase = new GetCategoryUseCase(repository)
+    useCase = new GetCategoryUseCase.UseCase(repository)
   })
 
   it('should trhows error when entity not found', async () => {

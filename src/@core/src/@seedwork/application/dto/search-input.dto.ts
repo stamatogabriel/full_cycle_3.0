@@ -7,3 +7,5 @@ export type SearchInputDto<Filter = string> = {
   sort_dir?: SortDirection | null
   filter?: Filter | null
 }
+
+export default SearchInputDto

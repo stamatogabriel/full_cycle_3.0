@@ -1,6 +1,6 @@
 import { ValidationError } from "../errors/validation-error";
 
-export default class ValidatorRules {
+export class ValidatorRules {
   private constructor(private value: any, private property: string) {}
 
   static values(value: any, property: string) {
@@ -39,3 +39,5 @@ export default class ValidatorRules {
 export function isEmpty(value: any) {
   return value === undefined || value === null;
 }
+
+export default ValidatorRules

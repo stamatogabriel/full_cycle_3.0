@@ -13,3 +13,5 @@ export class CategoryOutputMapper {
     return entity.toJSON()
   }
 }
+
+export default CategoryOutputMapper

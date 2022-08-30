@@ -1,15 +1,15 @@
 import { Category } from "#category/domain/entities/category";
 import CategoryInMemoryRepository from "#category/domain/repository/category-in-memory.repository";
 import { CategoryRepository } from "#category/domain/repository/category.repository";
-import ListCategories from "../list-categories.use-case";
+import { ListCategoriesUseCase } from "../list-categories.use-case";
 
 describe('ListCategoriesUseCase Unit Tests', () => {
-  let useCase: ListCategories;
+  let useCase: ListCategoriesUseCase.UseCase;
   let repository: CategoryInMemoryRepository;
 
   beforeAll(() => {
     repository = new CategoryInMemoryRepository()
-    useCase = new ListCategories(repository)
+    useCase = new ListCategoriesUseCase.UseCase(repository)
   })
 
   test('to output', () => {

@@ -1,6 +1,6 @@
 import { deepFreeze } from "../utils/object";
 
-export default abstract class ValueObject<Value = any> {
+export abstract class ValueObject<Value = any> {
   protected readonly _value: Value;
 
   constructor(value: Value) {
@@ -24,3 +24,5 @@ export default abstract class ValueObject<Value = any> {
     return valueStr === "[object Object]" ? JSON.stringify(this.value) : valueStr
   }
 }
+
+export default ValueObject

@@ -11,4 +11,6 @@ export namespace CategoryRepository {
     extends SearchableRepositoryInterface<Category, Filter, SearchParams, SearchResult> { }
 }
 
+export default CategoryRepository
+
 
