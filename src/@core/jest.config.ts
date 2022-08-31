@@ -3,7 +3,11 @@
  * https://jestjs.io/docs/configuration
  */
 
-module.exports = {
+export default {
+  displayName: {
+    name: '@core',
+    color: 'blue'
+  },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
