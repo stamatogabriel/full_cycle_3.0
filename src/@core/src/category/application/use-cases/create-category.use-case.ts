@@ -22,3 +22,5 @@ export namespace CreateCategoryUseCase {
     }
   }
 }
+
+export default CreateCategoryUseCase
