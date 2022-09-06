@@ -10,8 +10,8 @@ export class SequelizeModelFactory {
     return this.props.model.create(data ? data : this.props.defaultFactoryProps())
   }
 
-  make() {
-
+  make(data?) {
+    return this.props.model.build(data ? data : this.props.defaultFactoryProps())
   }
 
   async bulkCreate() {

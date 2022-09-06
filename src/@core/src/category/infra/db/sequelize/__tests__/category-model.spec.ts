@@ -1,19 +1,11 @@
-import { DataType, Sequelize } from "sequelize-typescript"
+import { setupSequelize } from "#seedwork/infra/testing/helpers/db";
+import { DataType } from "sequelize-typescript"
 import { CategoryModel } from "../category-model";
 
 describe('CategoryModel Unit Tests', () => {
-  let sequelize: Sequelize
-
-  beforeAll(() => sequelize = new Sequelize({
-    dialect: 'sqlite',
-    host: ':memory:',
-    logging: false,
+  setupSequelize({
     models: [CategoryModel]
-  }));
-
-  beforeEach(async () => { await sequelize.sync({ force: true }) })
-
-  afterAll(async () => { await sequelize.close() })
+  })
 
   test('mapping props', () => {
     const attributes = Object.keys(CategoryModel.getAttributes())
