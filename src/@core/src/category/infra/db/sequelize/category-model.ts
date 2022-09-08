@@ -30,7 +30,7 @@ export class CategoryModel extends Model<CategoryModelProperties> {
   static factory() {
     const chance: Chance.Chance = require('chance')();
   
-    return new SequelizeModelFactory({
+    return new SequelizeModelFactory<CategoryModel, CategoryModelProperties>({
       model: CategoryModel, 
       defaultFactoryProps: () => ({
         id: chance.guid({ version: 4 }),
