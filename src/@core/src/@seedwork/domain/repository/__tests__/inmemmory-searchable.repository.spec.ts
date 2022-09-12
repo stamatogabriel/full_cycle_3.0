@@ -167,7 +167,7 @@ describe('StubInMemorySearchableRepository Unit Tests', () => {
       }))
     })
 
-    it('should apply paginate and sort when order param is null', async () => {
+    describe('should apply paginate and sort when order param is null', () => {
       const items = [
         new StubEntity({ name: 'b', price: 3 }),
         new StubEntity({ name: 'a', price: 4 }),
@@ -175,8 +175,6 @@ describe('StubInMemorySearchableRepository Unit Tests', () => {
         new StubEntity({ name: 'c', price: 4 }),
         new StubEntity({ name: 'e', price: 4 }),
       ]
-
-      repository.items = items
 
       const arrange = [
         {
@@ -229,11 +227,14 @@ describe('StubInMemorySearchableRepository Unit Tests', () => {
         },
       ]
 
-      for (const item of arrange) {
+      beforeEach(() => {
+        repository.items = items
+      })
+
+      test.each(arrange)("when value is %j", async (item) => {
         let result = await repository.search(item.params)
         expect(result).toStrictEqual(item.result)
-      }
-
+      })
     })
 
     it('should apply filter, paginate and sort', async () => {

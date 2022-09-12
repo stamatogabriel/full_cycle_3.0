@@ -1,9 +1,9 @@
 import { Category } from "#category/domain";
 import { InvalidUuidError, LoadEntityError, UniqueEntityId } from "#seedwork/domain";
 import { setupSequelize } from "#seedwork/infra/testing/helpers/db";
-import { Sequelize } from "sequelize-typescript";
-import { CategoryModel } from "../category-model";
-import { CategoryModelMapper } from "../category.mapper";
+import { CategorySequelize } from "../category-sequelize";
+
+const { CategoryModel, CategoryModelMapper } = CategorySequelize
 
 describe('CategoryModelMapper Unit Tests', () => {
   setupSequelize({

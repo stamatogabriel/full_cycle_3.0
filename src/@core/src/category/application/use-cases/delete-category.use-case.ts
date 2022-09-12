@@ -1,4 +1,4 @@
-import { CategoryRepository } from "#category/domain/repository/category.repository"
+import { CategoryRepositoryContract as CategoryRepository } from "#category/domain/repository/category.repository";
 import { default as DefaultUseCase } from "#seedwork/application/use-case"
 
 export namespace DeleteCategoryUseCase {

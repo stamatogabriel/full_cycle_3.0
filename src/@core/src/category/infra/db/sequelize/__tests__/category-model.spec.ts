@@ -1,15 +1,15 @@
 import { setupSequelize } from "#seedwork/infra/testing/helpers/db";
 import { DataType } from "sequelize-typescript"
-import { CategoryModel } from "../category-model";
+import { CategorySequelize } from "../category-sequelize";
 
 describe('CategoryModel Unit Tests', () => {
   setupSequelize({
-    models: [CategoryModel]
+    models: [CategorySequelize.CategoryModel]
   })
 
   test('mapping props', () => {
-    const attributes = Object.keys(CategoryModel.getAttributes())
-    const attributesMap = CategoryModel.getAttributes()
+    const attributes = Object.keys(CategorySequelize.CategoryModel.getAttributes())
+    const attributesMap = CategorySequelize.CategoryModel.getAttributes()
 
     expect(attributes).toStrictEqual(['id', 'name', 'description', 'is_active', 'created_at'])
 
@@ -62,7 +62,7 @@ describe('CategoryModel Unit Tests', () => {
       created_at: new Date()
     }
 
-    const category = await CategoryModel.create(arrange)
+    const category = await CategorySequelize.CategoryModel.create(arrange)
     expect(category.toJSON()).toStrictEqual(arrange)
   })
 })

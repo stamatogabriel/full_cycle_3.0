@@ -1,4 +1,4 @@
-import { CategoryRepository } from "#category/domain/repository/category.repository";
+import { CategoryRepositoryContract as CategoryRepository } from "#category/domain/repository/category.repository";
 import { default as DefaultUseCase } from "#seedwork/application/use-case";
 import { CategoryOutput, CategoryOutputMapper } from "../dto/category-output";
 import { SearchInputDto } from "#seedwork/application/dto/search-input.dto";

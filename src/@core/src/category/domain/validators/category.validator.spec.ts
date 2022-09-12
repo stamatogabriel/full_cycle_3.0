@@ -62,7 +62,7 @@ describe('Category Validator Tests', () => {
     })
   })
 
-  test('valid cases for fields', () => {
+  describe('valid cases for fields', () => {
     const arrange: CategoryProps[] = [
       { name: 'some value' },
       { name: 'some value', description: undefined },
@@ -71,8 +71,7 @@ describe('Category Validator Tests', () => {
       { name: 'some value', is_active: true },
       { name: 'some value', is_active: false }
     ]
-
-    arrange.forEach((item: CategoryProps) => {
+    test.each(arrange)("validate %o", (item) => {
       const isValid = validator.validate(item)
       expect(isValid).toBeTruthy()
       expect(validator.validatedData).toStrictEqual(new CategoryRules(item))
