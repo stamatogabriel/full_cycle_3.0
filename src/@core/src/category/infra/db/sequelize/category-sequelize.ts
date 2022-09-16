@@ -1,12 +1,15 @@
 import { Op } from "sequelize";
 import { Column, DataType, PrimaryKey, Table, Model } from 'sequelize-typescript';
 
+import { UniqueEntityId } from '#seedwork/domain/value-objects/unique-entity-id.vo'
+import NotFoundError from "#seedwork/domain/errors/not-found.error";
+import EntityValidationError from "#seedwork/domain/errors/validation-error";
 import LoadEntityError from "#seedwork/domain/errors/load-entity.error";
+
 import { SequelizeModelFactory } from '#seedwork/infra/db/sequelize/sequelize.model-factory';
-import { UniqueEntityId, NotFoundError, EntityValidationError } from "#seedwork/domain";
 
-import { Category, CategoryRepositoryContract } from "#category/domain";
-
+import { Category } from "#category/domain/entities/category";
+import { CategoryRepositoryContract } from '#category/domain/repository/category.repository'
 
 export namespace CategorySequelize {
 
@@ -130,3 +133,5 @@ export namespace CategorySequelize {
     }
   }
 }
+
+export default CategorySequelize

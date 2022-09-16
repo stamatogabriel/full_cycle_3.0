@@ -12,6 +12,7 @@
   "exports": {
     "./@seedwork/application": "./dist/@seedwork/application/index.js",
     "./@seedwork/domain": "./dist/@seedwork/domain/index.js",
+    "./@seedwork/infra": "./dist/@seedwork/infra/index.js",
     "./category/domain": "./dist/category/domain/index.js",
     "./category/application": "./dist/category/application/index.js",
     "./category/infra": "./dist/category/infra/index.js"
@@ -66,6 +67,7 @@
   "dependencies": {
     "chance": "^1.1.8",
     "class-validator": "^0.13.2",
+    "dotenv": "^16.0.2",
     "expect": "^27.5.1",
     "lodash": "^4.17.21",
     "sequelize": "^6.21.4",

@@ -8,3 +8,5 @@ export class EntityValidationError extends Error {
     this.name = 'Entity Validation Error'
   }
 }
+
+export default EntityValidationError
