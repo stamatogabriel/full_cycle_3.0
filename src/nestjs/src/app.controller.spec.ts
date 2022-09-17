@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from './config/config.module';
+import { ConfigModule, CONFIG_SCHEMA_TYPE } from './config/config.module';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -12,7 +12,7 @@ describe('AppController', () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
-          envFilePath: join(__dirname, 'envs/.env.testing'),
+          envFilePath: join(__dirname, 'envs/.env.test'),
         }),
       ],
       controllers: [AppController],
@@ -20,7 +20,6 @@ describe('AppController', () => {
     }).compile();
 
     appController = app.get<AppController>(AppController);
-    console.log(app.get(ConfigService).get('DB_VENDOR'));
   });
 
   describe('root', () => {

@@ -5,5 +5,5 @@ coverage/
 .docker/zsh/history/.zsh_history
 __coverage__
 dist
-.env.testing
+.env.test
 .env

@@ -29,7 +29,7 @@ function makeConfig(envFile): Config {
  * Production config
  */
 
-const envTestingFile = join(__dirname, '../../../../.env.testing')
+const envTestingFile = join(__dirname, '../../../../.env.test')
 export const configTest = makeConfig(envTestingFile)
 
 
