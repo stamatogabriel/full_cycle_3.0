@@ -4,9 +4,10 @@ import {
   ListCategoriesUseCase,
   UpdateCategoryUseCase,
 } from '@fc/micro-videos/category/application';
-import { CategoriesController } from './categories.controller';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoryPresenter } from '../../presenter/category.presenter';
+import { CategoriesController } from '../../categories.controller';
+import { CreateCategoryDto } from '../../dto/create-category.dto';
+import { UpdateCategoryDto } from '../../dto/update-category.dto';
 
 describe('CategoriesController Unit Tests', () => {
   let controller: CategoriesController;
@@ -37,9 +38,10 @@ describe('CategoriesController Unit Tests', () => {
     };
 
     const category = await controller.create(input);
+    expect(category).toBeInstanceOf(CategoryPresenter);
     expect(mockCreateUseCase.execute).toHaveBeenCalledWith(input);
     expect(mockCreateUseCase.execute).toHaveBeenCalledTimes(1);
-    expect(category).toStrictEqual(output);
+    expect(category).toStrictEqual(new CategoryPresenter(output));
   });
 
   it('should delete a category', async () => {
@@ -84,12 +86,13 @@ describe('CategoriesController Unit Tests', () => {
 
     const category = await controller.update(id, input);
 
+    expect(category).toBeInstanceOf(CategoryPresenter);
     expect(mockUpdateUseCase.execute).toHaveBeenCalledWith({
       id,
       ...input,
     });
     expect(mockUpdateUseCase.execute).toHaveBeenCalledTimes(1);
-    expect(category).toStrictEqual(output);
+    expect(category).toStrictEqual(new CategoryPresenter(output));
   });
 
   it('should get a category', async () => {
@@ -110,9 +113,10 @@ describe('CategoriesController Unit Tests', () => {
     controller['getUseCase'] = mockGetUseCase as any;
     const category = await controller.findOne(id);
 
+    expect(category).toBeInstanceOf(CategoryPresenter);
     expect(mockGetUseCase.execute).toHaveBeenCalledWith({ id });
     expect(mockGetUseCase.execute).toHaveBeenCalledTimes(1);
-    expect(category).toStrictEqual(output);
+    expect(category).toStrictEqual(new CategoryPresenter(output));
   });
 
   it('should list  categories', async () => {
