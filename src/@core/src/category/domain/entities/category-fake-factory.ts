@@ -14,13 +14,28 @@ export class CategoryFakeBuilder<TBuild = any> {
     return new CategoryFakeBuilder<Category>()
   }
 
-  static theCategories() {
-    return new CategoryFakeBuilder<Category[]>()
+  static theCategories(countObjs: number) {
+    return new CategoryFakeBuilder<Category[]>(countObjs)
   }
 
   constructor(countObjs: number = 1) {
     this.countObjs = countObjs
     this.chance = Chance()
+  }
+
+  whithInvalidNameToLong(value?: string) {
+    this.name = value ?? this.chance.word({ length: 256 })
+    return this
+  }
+
+  withInvalidNameNotAString(value?: any) {
+    this.name = value ?? 5
+    return this
+  }
+
+  withInvalidEmptyName(value: "" | null | undefined) {
+    this.name = value
+    return this
   }
 
   withName(name: PropOrFactory<string>) { // fluent pattern
@@ -33,6 +48,11 @@ export class CategoryFakeBuilder<TBuild = any> {
     return this;
   }
 
+  withInvalidDescriptionNotAString(value?: any) {
+    this.description = value ?? 5
+    return this
+  }
+
   activate() {
     this.is_active = true
     return this;
@@ -41,6 +61,16 @@ export class CategoryFakeBuilder<TBuild = any> {
   deactivate() {
     this.is_active = false
     return this;
+  }
+
+  withInvalidIsActiveNotABoolean(value?: any) {
+    this.is_active = value ?? 'fake boolean'
+    return this
+  }
+
+  withInvalidEmptyIsActive(value: "" | null | undefined) {
+    this.is_active = value as any
+    return this
   }
 
   build(): TBuild {
