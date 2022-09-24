@@ -3,6 +3,7 @@ import NotFoundError from "#seedwork/domain/errors/not-found.error";
 import { UpdateCategoryUseCase } from "../../update-category.use-case"
 import { CategorySequelize } from "#category/infra/db/sequelize/category-sequelize";
 import { setupSequelize } from "#seedwork/infra/testing/helpers/db";
+import { CategoryFakeBuilder } from "#category/domain/entities/category-fake-factory";
 
 describe('UpdateCategoryUseCase Integration Tests', () => {
   let useCase: UpdateCategoryUseCase.UseCase;
@@ -24,7 +25,8 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
   })
 
   it('should update a category', async () => {
-    const model = await CategoryModel.factory().create()
+    const model = CategoryFakeBuilder.aCategory().build()
+    repository.insert(model)
 
     const arrange: any[] = [
       {

@@ -10,6 +10,10 @@ export abstract class InMemoryRepository<E extends Entity> implements Repository
     this.items.push(entity)
   }
 
+  async bulkInsert(entities: E[]): Promise<void> {
+    this.items.push(...entities)
+  }
+
   async findById(id: string | UniqueEntityId): Promise<E> {
     const _id = `${id}`
     return this._get(_id)

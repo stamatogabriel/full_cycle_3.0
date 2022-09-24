@@ -1,13 +1,18 @@
 import { Category } from "./category"
 import { Chance } from 'chance'
+import { UniqueEntityId } from "#seedwork/domain";
 
 type PropOrFactory<T> = T | ((index) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
   private chance: Chance.Chance
-  private name: PropOrFactory<string> = (_index) => this.chance.word();
-  private description: PropOrFactory<string | null> = (_index) => this.chance.paragraph();
-  private is_active: PropOrFactory<boolean> = (_index) => true;
+  // auto generated in entity
+  private _unique_entity_id = undefined
+  private _name: PropOrFactory<string> = (_index) => this.chance.word();
+  private _description: PropOrFactory<string | null> = (_index) => this.chance.paragraph();
+  private _is_active: PropOrFactory<boolean> = (_index) => true;
+  // auto generated in entity
+  private _created_at = undefined
   private countObjs: number
 
   static aCategory() {
@@ -23,66 +28,107 @@ export class CategoryFakeBuilder<TBuild = any> {
     this.chance = Chance()
   }
 
+  withUniqueEntityId(valueOrFactory: PropOrFactory<UniqueEntityId>) {
+    this._unique_entity_id = valueOrFactory
+    return this
+  }
+
+  withCreatedAt(valueOrFactory: PropOrFactory<Date>) {
+    this._created_at = valueOrFactory
+    return this
+  }
+
   whithInvalidNameToLong(value?: string) {
-    this.name = value ?? this.chance.word({ length: 256 })
+    this._name = value ?? this.chance.word({ length: 256 })
     return this
   }
 
   withInvalidNameNotAString(value?: any) {
-    this.name = value ?? 5
+    this._name = value ?? 5
     return this
   }
 
   withInvalidEmptyName(value: "" | null | undefined) {
-    this.name = value
+    this._name = value
     return this
   }
 
   withName(name: PropOrFactory<string>) { // fluent pattern
-    this.name = name
+    this._name = name
     return this;
   }
 
   withDescription(description: PropOrFactory<string | null>) {
-    this.description = description
+    this._description = description
     return this;
   }
 
   withInvalidDescriptionNotAString(value?: any) {
-    this.description = value ?? 5
+    this._description = value ?? 5
     return this
   }
 
   activate() {
-    this.is_active = true
+    this._is_active = true
     return this;
   }
 
   deactivate() {
-    this.is_active = false
+    this._is_active = false
     return this;
   }
 
   withInvalidIsActiveNotABoolean(value?: any) {
-    this.is_active = value ?? 'fake boolean'
+    this._is_active = value ?? 'fake boolean'
     return this
   }
 
   withInvalidEmptyIsActive(value: "" | null | undefined) {
-    this.is_active = value as any
+    this._is_active = value as any
     return this
   }
 
   build(): TBuild {
     const categories = new Array(this.countObjs).fill(undefined).map((_, index) => (
       new Category({
-        name: this.callFactory(this.name, index),
-        description: this.callFactory(this.description, index),
-        is_active: this.callFactory(this.is_active, index),
+        ...(this._unique_entity_id && { unique_entity_id: this.callFactory(this._unique_entity_id, index) }),
+        name: this.callFactory(this._name, index),
+        description: this.callFactory(this._description, index),
+        is_active: this.callFactory(this._is_active, index),
+        ...(this._created_at && { created_at: this.callFactory(this._created_at, index) }),
       })
     ));
 
     return this.countObjs === 1 ? categories[0] as any : categories
+  }
+
+  get name() {
+    return this.getValue('name')
+  }
+
+  get description() {
+    return this.getValue('description')
+  }
+
+  get is_active() {
+    return this.getValue('is_active')
+  }
+
+  get created_at() {
+    return this.getValue('created_at')
+  }
+
+  get unique_entity_id() {
+    return this.getValue('unique_entity_id')
+  }
+
+  private getValue(prop) {
+    const optional = ['unique_entity_id', 'created_at']
+    const privateProp = `_${prop}`
+
+    if (!this[privateProp] && optional.includes(prop)) throw new Error(`Property ${prop} not have a factory, use with methods`)
+
+    return this.callFactory(this[privateProp], 0);
   }
 
   private callFactory(factoryOrValue: PropOrFactory<any>, index: number) {

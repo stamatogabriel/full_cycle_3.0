@@ -1,3 +1,4 @@
+import { CategoryFakeBuilder } from "#category/domain/entities/category-fake-factory";
 import { Category } from "../../../domain/entities/category";
 import CategoryInMemoryRepository from "./category-in-memory.repository";
 
@@ -9,7 +10,7 @@ describe("CategoryInMemoryRepository unit tests", () => {
   });
 
   it("should not filter items when filter is null", async () => {
-    const items = [new Category({ name: "valid" })];
+    const items = CategoryFakeBuilder.theCategories(3).build();
     const filterSpy = jest.spyOn(items, "filter" as any);
 
     const filteredItems = await repository["applyFilter"](items, null);
@@ -18,11 +19,12 @@ describe("CategoryInMemoryRepository unit tests", () => {
   });
 
   it("should filter items", async () => {
+    const faker = CategoryFakeBuilder.aCategory()
     const items = [
-      new Category({ name: "valid" }),
-      new Category({ name: "invalid" }),
-      new Category({ name: "fake" }),
-      new Category({ name: "VALID" }),
+      faker.withName('valid').build(),
+      faker.withName('invalid').build(),
+      faker.withName('fake').build(),
+      faker.withName('VALID').build(),
     ];
 
     const filterSpy = jest.spyOn(items, "filter" as any);
@@ -55,7 +57,7 @@ describe("CategoryInMemoryRepository unit tests", () => {
 
     let sortedItems = await repository["applySort"](items, "name", "asc");
     expect(sortedItems).toStrictEqual([items[3], items[2], items[1], items[0]]);
-    
+
     sortedItems = await repository["applySort"](items, "name", "desc");
     expect(sortedItems).toStrictEqual([items[0], items[1], items[2], items[3]]);
   });
