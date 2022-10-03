@@ -2,6 +2,7 @@ import Entity from  "#seedwork/domain/entities/entity";
 import UniqueEntityId from  "#seedwork/domain/value-objects/unique-entity-id.vo";
 import CategoryValidatorFactory from "../validators/category.validator";
 import { EntityValidationError } from  "#seedwork/domain/errors/validation-error";
+import { CategoryFakeBuilder } from "./category-fake-factory";
 
 export type CategoryProps = {
   name: string;
@@ -35,6 +36,10 @@ export class Category extends Entity<CategoryProps> {
     const isValid = validator.validate(props)
 
     if (!isValid) throw new EntityValidationError(validator.errors)
+  }
+
+  static fake() {
+    return CategoryFakeBuilder
   }
 
   activate(): void {

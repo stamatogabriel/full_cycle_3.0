@@ -11,9 +11,9 @@ import {
   UpdateCategoryUseCase,
 } from '@fc/micro-videos/category/application';
 import { CATEGORY_PROVIDERS } from '../../category.providers';
-import { CategorySequelize } from '@fc/micro-videos/category/infra';
 import { NotFoundError } from '@fc/micro-videos/@seedwork/domain';
 import { CategoryPresenter } from '../../presenter/category.presenter';
+import { Category } from '@fc/micro-videos/category/domain';
 
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;
@@ -109,10 +109,10 @@ describe('CategoriesController Integration Tests', () => {
   });
 
   describe('should update a category', () => {
-    let category: any;
+    const category = Category.fake().aCategory().build();
 
     beforeEach(async () => {
-      category = await CategorySequelize.CategoryModel.factory().create();
+      await repository.insert(category);
     });
 
     const arrange = [
@@ -177,7 +177,8 @@ describe('CategoriesController Integration Tests', () => {
   });
 
   it('delete a category', async () => {
-    const category = await CategorySequelize.CategoryModel.factory().create();
+    const category = Category.fake().aCategory().build();
+    await repository.insert(category);
     const output = await controller.remove(category.id);
 
     expect(output).toStrictEqual({ message: 'category successfully deleted' });
@@ -187,7 +188,8 @@ describe('CategoriesController Integration Tests', () => {
   });
 
   it('should get a category', async () => {
-    const category = await CategorySequelize.CategoryModel.factory().create();
+    const category = Category.fake().aCategory().build();
+    await repository.insert(category);
     const output = await controller.findOne(category.id);
 
     expect(output).toBeInstanceOf(CategoryPresenter);

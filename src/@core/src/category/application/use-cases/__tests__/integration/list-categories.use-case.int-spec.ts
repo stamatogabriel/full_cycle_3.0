@@ -2,7 +2,7 @@ import { CategorySequelize } from "#category/infra/db/sequelize/category-sequeli
 import { setupSequelize } from "#seedwork/infra/testing/helpers/db";
 import { ListCategoriesUseCase } from "../../list-categories.use-case";
 import _chance from 'chance'
-import { CategoryFakeBuilder } from "#category/domain/entities/category-fake-factory";
+import { Category } from "#category/domain";
 
 const chance = _chance()
 
@@ -20,7 +20,7 @@ describe('ListCategoriesUseCase Integration Tests', () => {
   })
 
   it('should return output using empty input with categories ordered by created_at', async () => {
-    const faker = CategoryFakeBuilder.theCategories(2)
+    const faker = Category.fake().theCategories(2)
 
     const models = faker
       .withName((index) => `Category ${index}`)
@@ -42,7 +42,7 @@ describe('ListCategoriesUseCase Integration Tests', () => {
   })
 
   it('should returns outpu using sort and filter', async () => {
-    const faker = CategoryFakeBuilder.aCategory()
+    const faker = Category.fake().aCategory()
     const models = [
       faker.withName('a').build(),
       faker.withName('AAA').build(),

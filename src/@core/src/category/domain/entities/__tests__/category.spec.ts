@@ -1,6 +1,7 @@
 import { Category } from "../category";
 import { omit } from "lodash";
 import UniqueEntityId from  "#seedwork/domain/value-objects/unique-entity-id.vo";
+import { CategoryFakeBuilder } from "../category-fake-factory";
 
 describe("Category Unit Tests", () => {
 
@@ -158,5 +159,9 @@ describe("Category Unit Tests", () => {
     category.deactivate()
 
     expect(category.is_active).not.toBeTruthy()
+  })
+
+  test("category fake", () => {
+    expect(typeof Category.fake()).toBe('function')
   })
 });

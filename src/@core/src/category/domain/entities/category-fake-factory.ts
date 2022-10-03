@@ -2,7 +2,7 @@ import { Category } from "./category"
 import { Chance } from 'chance'
 import { UniqueEntityId } from "#seedwork/domain";
 
-type PropOrFactory<T> = T | ((index) => T);
+type PropOrFactory<T> = T | ((index: number) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
   private chance: Chance.Chance
@@ -23,7 +23,7 @@ export class CategoryFakeBuilder<TBuild = any> {
     return new CategoryFakeBuilder<Category[]>(countObjs)
   }
 
-  constructor(countObjs: number = 1) {
+  private constructor(countObjs: number = 1) {
     this.countObjs = countObjs
     this.chance = Chance()
   }
@@ -96,7 +96,9 @@ export class CategoryFakeBuilder<TBuild = any> {
         description: this.callFactory(this._description, index),
         is_active: this.callFactory(this._is_active, index),
         ...(this._created_at && { created_at: this.callFactory(this._created_at, index) }),
-      })
+      },
+        !this._unique_entity_id ? undefined : this.callFactory(this._unique_entity_id, index)
+      )
     ));
 
     return this.countObjs === 1 ? categories[0] as any : categories

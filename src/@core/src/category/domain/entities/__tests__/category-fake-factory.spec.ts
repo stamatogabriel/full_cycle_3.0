@@ -173,15 +173,15 @@ describe('CategoryFakeFactory Unit Tests', () => {
     })
 
     test('with Unique Entity Id', () => {
-      const uniqueEntityId = new UniqueEntityId();
-      const $this = faker.withUniqueEntityId(uniqueEntityId)
+      const unique_entity_id = new UniqueEntityId();
+      const $this = faker.withUniqueEntityId(unique_entity_id)
       expect($this).toBeInstanceOf(CategoryFakeBuilder)
-      expect(faker['_unique_entity_id']).toBe(uniqueEntityId)
+      expect(faker['_unique_entity_id']).toBe(unique_entity_id)
 
-      faker.withUniqueEntityId(() => uniqueEntityId)
-      expect(faker['_unique_entity_id']()).toBe(uniqueEntityId)
+      faker.withUniqueEntityId(() => unique_entity_id)
+      expect(faker['_unique_entity_id']()).toBe(unique_entity_id)
 
-      expect(faker.unique_entity_id).toBe(uniqueEntityId)
+      expect(faker.unique_entity_id).toBe(unique_entity_id)
 
     })
 
@@ -241,6 +241,64 @@ describe('CategoryFakeFactory Unit Tests', () => {
       expect(categories[0].created_at.getTime()).toBe(date.getTime() + 2)
       expect(categories[1].created_at.getTime()).toBe(date.getTime() + 1 + 2)
 
+    })
+  })
+
+  it('should create a category', () => {
+    const faker = CategoryFakeBuilder.aCategory()
+    let category = faker.build()
+
+    expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId)
+    expect(typeof category.name).toBe('string')
+    expect(typeof category.description).toBe('string')
+    expect(category.is_active).toBeTruthy()
+    expect(category.created_at).toBeInstanceOf(Date)
+
+    const created_at = new Date()
+    const unique_entity_id = new UniqueEntityId()
+    category = faker
+      .withUniqueEntityId(unique_entity_id)
+      .withName('test')
+      .withDescription('test')
+      .deactivate()
+      .withCreatedAt(created_at)
+      .build()
+
+    expect(category.uniqueEntityId.value).toBe(unique_entity_id.value)
+    expect(category.name).toBe('test')
+    expect(category.description).toBe('test')
+    expect(category.is_active).toBeFalsy()
+    expect(category.created_at).toBe(created_at)
+  })
+
+  it('should create many categories', () => {
+    const faker = CategoryFakeBuilder.theCategories(2)
+    let categories = faker.build()
+
+    categories.forEach(category => {
+      expect(category.uniqueEntityId).toBeInstanceOf(UniqueEntityId)
+      expect(typeof category.name).toBe('string')
+      expect(typeof category.description).toBe('string')
+      expect(category.is_active).toBeTruthy()
+      expect(category.created_at).toBeInstanceOf(Date)
+    })
+
+    const created_at = new Date()
+    const unique_entity_id = new UniqueEntityId()
+    categories = faker
+      .withUniqueEntityId(unique_entity_id)
+      .withName('test')
+      .withDescription('test')
+      .deactivate()
+      .withCreatedAt(created_at)
+      .build()
+
+    categories.forEach(category => {
+      expect(category.uniqueEntityId.value).toBe(unique_entity_id.value)
+      expect(category.name).toBe('test')
+      expect(category.description).toBe('test')
+      expect(category.is_active).toBeFalsy()
+      expect(category.created_at).toBe(created_at)
     })
   })
 })
