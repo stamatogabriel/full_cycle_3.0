@@ -21,7 +21,10 @@ import {
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { SearchCategoryDto } from './dto/search-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { CategoryPresenter } from './presenter/category.presenter';
+import {
+  CategoryCollectionPresenter,
+  CategoryPresenter,
+} from './presenter/category.presenter';
 
 @Controller('categories')
 export class CategoriesController {
@@ -47,8 +50,9 @@ export class CategoriesController {
   }
 
   @Get()
-  findAll(@Query() searchParams: SearchCategoryDto) {
-    return this.listUseCase.execute(searchParams);
+  search(@Query() searchParams: SearchCategoryDto) {
+    const output = this.listUseCase.execute(searchParams);
+    return new CategoryCollectionPresenter(output);
   }
 
   @Get(':id')
