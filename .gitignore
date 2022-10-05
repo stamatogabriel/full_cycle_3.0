@@ -4,6 +4,7 @@ tsconfig.tsbuildinfo
 coverage/
 .docker/zsh/history/.zsh_history
 __coverage__
+__coverage
 dist
 .env.test
 .env

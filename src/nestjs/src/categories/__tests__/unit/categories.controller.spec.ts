@@ -4,7 +4,10 @@ import {
   ListCategoriesUseCase,
   UpdateCategoryUseCase,
 } from '@fc/micro-videos/category/application';
-import { CategoryPresenter } from '../../presenter/category.presenter';
+import {
+  CategoryCollectionPresenter,
+  CategoryPresenter,
+} from '../../presenter/category.presenter';
 import { CategoriesController } from '../../categories.controller';
 import { CreateCategoryDto } from '../../dto/create-category.dto';
 import { UpdateCategoryDto } from '../../dto/update-category.dto';
@@ -151,10 +154,10 @@ describe('CategoriesController Unit Tests', () => {
     };
 
     controller['listUseCase'] = mockListUseCase as any;
-    const category = await controller.findAll(input);
-
+    const category = await controller.search(input);
+    expect(category).toBeInstanceOf(CategoryCollectionPresenter);
     expect(mockListUseCase.execute).toHaveBeenCalledWith(input);
     expect(mockListUseCase.execute).toHaveBeenCalledTimes(1);
-    expect(category).toStrictEqual(output);
+    expect(category).toEqual(new CategoryCollectionPresenter(output));
   });
 });

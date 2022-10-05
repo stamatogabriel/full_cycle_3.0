@@ -16,7 +16,7 @@ export default {
   collectCoverageFrom: [
     "**/*.(t|j)s"
   ],
-  coverageDirectory: "../coverage",
+  coverageDirectory: '../__coverage',
   testEnvironment: "node",
   setupFilesAfterEnv: [
     "../../@core/src/@seedwork/domain/tests/validations.ts",
@@ -28,5 +28,14 @@ export default {
     '#seedwork/(.*)$': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/@seedwork/$1',
     // '#category/domain': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/category/domain/index.js',
     '#category/(.*)$': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/category/$1',
-  }
+  },
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80 
+    },
+  },
+  coverageProvider: "v8",
 }
