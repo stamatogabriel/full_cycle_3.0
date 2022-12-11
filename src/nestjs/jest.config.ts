@@ -8,7 +8,6 @@ export default {
     "json",
     "ts"
   ],
-  rootDir: "src",
   testRegex: [".*\\..*spec\\.ts$"],
   transform: {
     "^.+\\.(t|j)s$": "@swc/jest"
@@ -19,15 +18,15 @@ export default {
   coverageDirectory: '../__coverage',
   testEnvironment: "node",
   setupFilesAfterEnv: [
-    "../../@core/src/@seedwork/domain/tests/validations.ts",
-    "../../@core/src/@seedwork/domain/tests/jest.ts"
+    "../@core/src/@seedwork/domain/tests/validations.ts",
+    "../@core/src/@seedwork/domain/tests/jest.ts"
   ],
   moduleNameMapper: {
-    '@fc/micro\\-videos/(.*)$': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/$1',
+    '@fc/micro\\-videos/(.*)$': '<rootDir>/../../node_modules/@fc/micro-videos/dist/$1',
     // '#seedwork/domain': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/@seedwork/domain/index.js',
-    '#seedwork/(.*)$': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/@seedwork/$1',
+    '#seedwork/(.*)$': '<rootDir>/../../node_modules/@fc/micro-videos/dist/@seedwork/$1',
     // '#category/domain': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/category/domain/index.js',
-    '#category/(.*)$': '<rootDir>/../../../node_modules/@fc/micro-videos/dist/category/$1',
+    '#category/(.*)$': '<rootDir>/../../node_modules/@fc/micro-videos/dist/category/$1',
   },
   coverageThreshold: {
     global: {
